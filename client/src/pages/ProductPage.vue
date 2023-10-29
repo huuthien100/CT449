@@ -1,9 +1,6 @@
 <template>
   <div class="container mx-auto my-4" v-if="products.length > 0">
-    <!-- Title -->
-    <h1 class="text-xl font-semibold">All Products</h1>
 
-    <!-- Filter -->
     <form action="" class="flex gap-4 items-center mb-4 mt-2">
       <div class="row flex items-center gap-2">
         <span>Price: </span>
@@ -15,7 +12,6 @@
           <option selected value="1">Increase</option>
           <option value="-1">Decrease</option>
         </select>
-        <!-- Dropdown menu -->
       </div>
       <div class="row flex items-center gap-2">
         <span>Version: </span>
@@ -27,10 +23,8 @@
           <option selected value="-1">New</option>
           <option value="1">Old</option>
         </select>
-        <!-- Dropdown menu -->
       </div>
     </form>
-    <!-- Product -->
     <div class="grid grid-cols-5 gap-4" v-if="products.length > 0">
       <div class="" v-for="product in products" :key="product._id">
         <router-link
@@ -45,8 +39,6 @@
         </router-link>
       </div>
     </div>
-
-    <!-- Pagination -->
     <div
       class="flex justify-center gap-4 items-center mt-4 relative"
       v-if="pagination"
@@ -60,7 +52,6 @@
           class="relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20"
         >
           <span class="sr-only">Previous</span>
-          <!-- Heroicon name: mini/chevron-left -->
           <svg
             class="h-5 w-5"
             xmlns="http://www.w3.org/2000/svg"
@@ -86,7 +77,6 @@
           class="relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20"
         >
           <span class="sr-only">Next</span>
-          <!-- Heroicon name: mini/chevron-right -->
           <svg
             class="h-5 w-5"
             xmlns="http://www.w3.org/2000/svg"
@@ -102,11 +92,7 @@
           </svg>
         </button>
       </nav>
-      <div
-        class="right-[40%] rounded-md z-10 inline-flex items-center border border-indigo-500 bg-indigo-50 px-4 py-2 text-sm font-medium text-indigo-600 focus:z-20"
-      >
-        {{ currentPage }} / {{ Math.ceil(pagination.total / pagination.limit) }}
-      </div>
+      
     </div>
   </div>
   <div class="my-8 text-center" v-else>No Products</div>

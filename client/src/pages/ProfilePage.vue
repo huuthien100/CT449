@@ -8,7 +8,7 @@
           <strong class="text-base">Full Name : </strong>
           <span class="capitalize">{{ user.fullName }}</span>
         </div>
-s
+
         <div class="" @click="handleEditInfo('fullName')">
           <svg
             xmlns="http://www.w3.org/2000/svg"

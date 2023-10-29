@@ -3,14 +3,13 @@
     <div class="mt-4">
       <div class="container max-w-4xl mx-auto px-8">
         <h1 class="text-center text-2xl font-semibold capitalize">
-          Management Receipt Order
+          Management Receipt
         </h1>
         <div
           class="p-2 border rounded-md mt-4"
           v-for="receipt in receipts"
           :key="receipt._id"
         >
-          <!-- Info -->
           <div class="border-b">
             <h1 class="font-semibold pb-2">
               <span class="text-gray-500">Full Name:</span>
@@ -30,7 +29,6 @@
             v-for="cart in receipt.carts"
             :key="cart._id"
           >
-            <!-- Info -->
             <div class="flex gap-4">
               <div class="w-[100px] h-[100px] rounded-md overflow-hidden">
                 <img
@@ -59,7 +57,6 @@
               </p>
             </div>
           </div>
-          <!-- Action -->
           <div class="border-t py-4">
             <div class="">
               <button
@@ -92,30 +89,16 @@ import { useStore } from "vuex";
 import { ref } from "vue";
 export default {
   setup() {
-    // Hooks
     const store = useStore();
-
-    // Ref
     const loading = ref(false);
-
-    // Data
     const receipts = computed(() => store.state.receipts.receipts);
-
-    // Actions
     store.dispatch("receipts/getReceipts");
-
-    // Func global
     const handleConfirm = async (idReceipt) => {
-      // Submit data
       try {
         loading.value = true;
         if (window.confirm("Bạn chắc chắn xác nhận đơn hàng này?")) {
-          // Call api
           await receiptApi.confirmReceipt(idReceipt);
-
-          // Get again data
           store.dispatch("receipts/getReceipts");
-
           alert("Xác nhận đơn hàng thành công");
         }
       } catch (err) {
@@ -125,16 +108,11 @@ export default {
     };
 
     const handleDelete = async (idReceipt) => {
-      // Submit data
       try {
         loading.value = true;
         if (window.confirm("You confirm delete cart?")) {
-          // Call api
           await receiptApi.deleteReceipt(idReceipt);
-
-          // Get again data
           store.dispatch("receipts/getReceipts");
-
           alert("Delete successfully");
         }
       } catch (err) {
@@ -142,14 +120,9 @@ export default {
       }
       loading.value = false;
     };
-
     return {
-      // Data
       receipts,
-
       loading,
-
-      // Func
       handleConfirm,
       handleDelete,
     };

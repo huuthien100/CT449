@@ -11,9 +11,9 @@
 
     <Parallax />
 
-    <Subheadline title="COFFEE MAGAZINE" />
+    <Subheadline title="sale" />
 
-    <CoffeeMegazine />
+    <Sale />
   </main>
 </template>
 
@@ -22,7 +22,7 @@ import Banner from "@/components/Home/Banner.vue";
 import Advertisement from "@/components/Home/OurProduct.vue";
 import FeaturedProduct from "@/components/Home/FeaturedProduct.vue";
 import MoreProduct from "@/components/Home/MoreProduct.vue";
-import CoffeeMegazine from "@/components/Home/CoffeeMegazine.vue";
+import Sale from "@/components/Home/Sale.vue";
 import Parallax from "@/components/Home/Parallax.vue";
 import Subheadline from "../components/common/Subheadline.vue";
 import { useStore } from "vuex";
@@ -33,7 +33,7 @@ export default {
     Advertisement,
     FeaturedProduct,
     MoreProduct,
-    CoffeeMegazine,
+    Sale,
     Parallax,
     Subheadline,
   },

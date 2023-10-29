@@ -4,7 +4,7 @@
       <div class="w-[20%] rounded-sm overflow-hidden">
         <img
           class="w-full h-full object-cover"
-          src="../assets/images/pz-1.jpg"
+          src="../assets/images/map.jpg"
           alt=""
         />
       </div>
@@ -47,7 +47,7 @@
       <div class="w-[20%] rounded-sm overflow-hidden">
         <img
           class="w-full h-full object-cover"
-          src="../assets/images/pz-2.jpg"
+          src="../assets/images/staff.jpg"
           alt=""
         />
       </div>
@@ -56,13 +56,13 @@
       <div class="w-[20%] rounded-sm overflow-hidden">
         <img
           class="w-full h-full object-cover"
-          src="../assets/images/pz-3.jpg"
+          src="../assets/images/new.jpg"
           alt=""
         />
       </div>
       <div class="w-[75%] px-4">
         <h1 class="text-3xl capitalize font-semibold mb-2">
-          We are always looking for new drinks
+          We are always looking for new clothes
         </h1>
         <p class="leading-10">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit omnis a

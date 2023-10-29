@@ -7,17 +7,13 @@
     >
       <div class="mx-16 text-white text-center">
         <div class="uppercase mb-6">Welcome To Our Store</div>
-        <div class="font-medium text-5xl mb-6 uppercase">Pizza Store</div>
-        <div class="mb-6">
-          We hope to bring you great book specials that will help you create
-          inspiration
-        </div>
+        <div class="font-medium text-2xl mb-6 uppercase">We hope your have great shopping trip!</div>
         <div class="font-medium flex justify-center">
           <router-link :to="{ name: 'Product', params: {} }">
             <div
               class="bg-white w-max rounded-sm text-gray-900 px-8 py-4 tracking-wider text-xs uppercase cursor-pointer hover:opacity-90"
             >
-              Explore Products
+              Check Products
             </div>
           </router-link>
         </div>
@@ -32,6 +28,6 @@ export default {};
 
 <style scoped>
 .banner {
-  background-image: url("@/assets/images/banner-pizza.png");
+  background-image: url("@/assets/images/banner.jpg");
 }
 </style>

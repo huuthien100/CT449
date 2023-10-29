@@ -8,14 +8,14 @@
           loop
           class="w-full rounded-md object-cover max-h-[370px]"
         >
-          <source src="../../assets/videos/pizza.mp4" type="video/mp4" />
+          <source src="../../assets/videos/video.mp4" type="video/mp4" />
         </video>
       </div>
       <div class="text-center lg:text-left basis-1/2 lg:pl-8">
         <div
           class="text-2xl font-medium mb-4 capitalize leading-10 tracking-wide"
         >
-          Our Pizza store are processed using modern techniques.
+          Our store have alot clothes.
         </div>
         <div class="text-gray-500 leading-7 mb-6">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid
@@ -32,7 +32,7 @@
               href=""
               class="text-coffee-400 uppercase pb-2 hover:text-coffee-600 text-base relative after:bg-coffee-200 hover:after:bg-coffee-600 after:absolute after:w-full after:h-0.5 after:bottom-0 after:left-0 after:transition-all after:duration-700 after:ease-in-out"
             >
-              See how to make
+              See more
             </span></router-link
           >
         </div>

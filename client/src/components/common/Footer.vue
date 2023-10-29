@@ -4,10 +4,9 @@
   >
     <div class="flex flex-col text-center md:text-left md:flex-row gap-8">
       <div class="basis-2/6">
-        <div class="font-bold text-xl mb-4 text-gray-800">Pizza Store</div>
+        <div class="font-bold text-xl mb-4 text-gray-800">Clothes Store</div>
         <div class="mb-20 md:mb-8">
-          Delivering the best coffee life since 1996. From coffee geeks to the
-          real ones.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque voluptatibus harum dolores distinctio excepturi, quis aspernatur veritatis facere eum velit autem. Corrupti debitis aspernatur tempore dolorum est atque? Animi, optio!
         </div>
         <div class="text-gray-400 hover:text-coffee-400">
           Pizza Store Inc. © 2023
@@ -46,7 +45,7 @@
             <a
               href="#"
               class="hover:text-coffee-400 text-xl tracking-widest font-bold text-coffee-600"
-              >duyanh@gmail.com</a
+              >huuthienkg10@gmail.com</a
             >
           </div>
         </div>

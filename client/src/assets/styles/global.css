@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Playpen+Sans&display=swap');
-body {
+@import url('https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@500&display=swap');
+body,div {
   font-family: 'Playpen Sans', cursive;}
 *,
 *::before,

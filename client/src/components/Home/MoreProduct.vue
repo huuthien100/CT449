@@ -31,7 +31,7 @@
               <div
                 class="ct-button bg-slate-100 absolute hidden group-hover:block group-hover:animate-fadeIn bottom-3 w-[90%] left-1/2 -translate-x-1/2 text-center"
               >
-                EXPLORE DETAIL
+                DETAIL
               </div>
             </div>
           </router-link>
