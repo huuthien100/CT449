@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* ct - custom */
+.ct-top-menu-expanded {
+  @apply absolute top-10 z-50 bg-white w-full text-center animate-slideDown;
+}
+
+.ct-top-menu-item {
+  @apply cursor-pointer py-1 hover:text-gray-800 relative after:lg:absolute after:lg:bottom-0 after:lg:left-0 after:lg:bg-coffee-200 after:lg:h-0.5 after:lg:w-0 hover:after:lg:w-full after:lg:transition-all after:lg:ease-in-out after:lg:duration-300;
+}
+
+.ct-top-menu-profile {
+  @apply cursor-pointer py-1 hover:text-gray-800 relative after:lg:absolute before:bg-transparent before:w-full before:h-full before:absolute before:top-[50%] before:right-2;
+}
+
+.ct-top-menu-cart {
+  @apply cursor-pointer py-1 hover:text-gray-800 relative;
+}
+
+.ct-top-menu-item-active {
+  @apply cursor-pointer py-1 hover:text-gray-800 relative after:lg:absolute after:lg:bottom-0 after:lg:left-0 after:lg:bg-coffee-200 after:lg:h-0.5  after:lg:w-full;
+}
+
+.ct-icon {
+  @apply w-5 h-5 inline-block;
+}
+
+.ct-badge-circle {
+  @apply text-xs text-center rounded-full px-1.5;
+}
+
+.ct-subheadline {
+  @apply flex justify-center items-center;
+}
+
+.ct-subheadline-deco-line {
+  @apply w-8 h-px bg-gray-400;
+}
+
+.ct-subheadline-deco-label {
+  @apply mx-4 text-gray-500 font-medium text-[12px] text-center;
+}
+
+.ct-button {
+  @apply text-sm py-3 px-4 uppercase font-semibold text-center hover:opacity-90;
+}
