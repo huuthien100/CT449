@@ -1,5 +1,13 @@
 const Cart = require("../models/cart");
-// const cloudinary = require("cloudinary");
+
+const handleResponse = (res, success, message, results) => {
+  if (success) {
+    res.status(200).json({ success, message, results });
+  } else {
+    console.error(message);
+    res.status(500).json({ success, message });
+  }
+};
 
 const cartControllers = {
   getCart: async (req, res) => {
@@ -14,26 +22,17 @@ const cartControllers = {
         "createdAt",
       ]);
 
-      return res.status(200).json({
-        success: true,
-        results: carts,
-      });
+      handleResponse(res, true, "Retrieve cart successfully", carts);
     } catch (error) {
-      console.log(error);
-      return res.status(500).json({
-        success: false,
-        message: "Server erorr",
-      });
+      handleResponse(res, false, "Server error");
     }
   },
   addToCart: async (req, res) => {
     const { product, quantity, size, price } = req.body;
 
     try {
-      // Data
       let cart;
 
-      // Check exist => update data
       cart = await Cart.findOne({
         user: req.userId,
         "product._id": product._id,
@@ -41,11 +40,6 @@ const cartControllers = {
       });
 
       if (cart) {
-        // Check old size
-        // Case 1: Same size -> update again quantity, price
-        // Case 2: Different size -> create new cart
-
-        // Case 1
         if (cart.size === size) {
           cart = await Cart.findOneAndUpdate(
             { user: req.userId, "product._id": product._id, ordered: false },
@@ -53,7 +47,6 @@ const cartControllers = {
             { new: true }
           );
         } else {
-          // Case 2
           const nCart = new Cart({
             product,
             user: req.userId,
@@ -64,7 +57,6 @@ const cartControllers = {
           cart = await nCart.save();
         }
       } else {
-        // Add product to cart
         const nCart = new Cart({
           product,
           user: req.userId,
@@ -74,17 +66,9 @@ const cartControllers = {
         });
         cart = await nCart.save();
       }
-      return res.status(200).json({
-        success: true,
-        message: "Thêm vào giõ hàng thành công",
-        results: cart,
-      });
+      handleResponse(res, true, "Added to cart successfully", cart);
     } catch (error) {
-      console.log(error);
-      return res.status(500).json({
-        success: false,
-        message: "Server erorr",
-      });
+      handleResponse(res, false, "Server error");
     }
   },
 
@@ -100,33 +84,18 @@ const cartControllers = {
         { new: true }
       );
 
-      return res.status(200).json({
-        success: true,
-        message: "Cập nhật giõ hàng thành công",
-        results: productUpdate,
-      });
+      handleResponse(res, true, "Updated cart successfully", productUpdate);
     } catch (error) {
-      console.log(error);
-      return res.status(500).json({
-        success: false,
-        message: "Server error!",
-      });
+      handleResponse(res, false, "Server error");
     }
   },
   deleteToCart: async (req, res) => {
     const { id } = req.params;
     try {
       const newData = await Cart.findOneAndDelete({ _id: id });
-      return res.status(200).json({
-        success: true,
-        message: "Xóa sản phẩm thành công",
-      });
+      handleResponse(res, true, "Deleted product successfully");
     } catch (error) {
-      console.log(error);
-      return res.status(500).json({
-        success: false,
-        message: "Server error!",
-      });
+      handleResponse(res, false, "Server error");
     }
   },
 
@@ -136,16 +105,9 @@ const cartControllers = {
         { user: req.userId, ordered: false },
         { ordered: true }
       );
-      return res.status(200).json({
-        success: true,
-        message: "Đặt hàng thành công",
-      });
+      handleResponse(res, true, "Ordered successfully");
     } catch (error) {
-      console.log(error);
-      return res.status(500).json({
-        success: false,
-        message: "Server error!",
-      });
+      handleResponse(res, false, "Server error");
     }
   },
 };
