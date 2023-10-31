@@ -15,7 +15,6 @@ import NotFoundPage from "@/pages/NotFoundPage.vue";
 import jwt_decode from "jwt-decode";
 import CartPage from "@/pages/CartPage.vue";
 import { ACCESS_TOKEN_WEB_CAFE_SHOP } from "./utils/settingSystem";
-// Auth Guards
 const requireLogout = (to, from, next) => {
   const token = localStorage.getItem(ACCESS_TOKEN_WEB_CAFE_SHOP);
   if (token) next({ name: "Home", params: {} });

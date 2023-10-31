@@ -6,15 +6,12 @@ dotenv.config();
 const app = express();
 const port = 5000;
 
-// Config app
 app.use(cors());
 app.use(express.json());
 
-// Connect database
 const { connectDb } = require("./utils/connectDb");
 connectDb();
 
-// Routes
 const routeUser = require("./routes/user");
 const routeProduct = require("./routes/product");
 const routeCart = require("./routes/cart");

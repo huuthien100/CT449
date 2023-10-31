@@ -1,86 +1,60 @@
 const Products = require("../models/product");
-// const cloudinary = require("cloudinary");
+
+const handleResponse = (res, success, message, results) => {
+  if (success) {
+    res.status(200).json({ success, message, results });
+  } else {
+    console.error(message);
+    res.status(500).json({ success, message });
+  }
+};
+
+const handlePagination = (page) => {
+  const pageNumber = page * 1 || 1;
+  const limit = 10;
+  const skip = (pageNumber - 1) * limit;
+  return { skip, limit };
+};
 
 const productControllers = {
   getAllProduct: async (req, res) => {
-    const { page } = req.query;
-    const { createdAt, price } = req.query; // Handle sort
+    const { page, createdAt, price } = req.query;
     try {
-      // Pagination
-      const pageNumber = page * 1 || 1;
-      const limit = 15;
-      const skip = (pageNumber - 1) * limit;
-      // Products
+      const { skip, limit } = handlePagination(page);
       const products = await Products.find({})
-        .sort({
-          "price.S": price || "1",
-          createdAt: createdAt || "-1",
-        })
+        .sort({ "price.S": price || "1", createdAt: createdAt || "-1" })
         .limit(limit)
         .skip(skip);
       const totalProduct = await Products.count();
-      return res.status(200).json({
-        success: true,
-        message: "Lấy tất cả sản phẩm thành công",
-        results: {
-          data: products,
-          pagination: {
-            limit: 15,
-            page: pageNumber,
-            total: totalProduct,
-          },
-        },
+      handleResponse(res, true, "Get all products successfully", {
+        data: products,
+        pagination: { limit: 10, page, total: totalProduct },
       });
     } catch (error) {
-      console.log(error);
-      return res.status(500).json({
-        success: false,
-        message: "Server erorr",
-      });
+      handleResponse(res, false, "Server error");
     }
   },
   getDetailProduct: async (req, res) => {
+    const { id } = req.params;
     try {
-      const { id } = req.params;
       const product = await Products.findOne({ _id: id });
-
-      return res.status(200).json({
-        success: true,
-        message: "Lấy chi tiết sản phẩm thành công",
-        results: product,
-      });
+      handleResponse(res, true, "Get product details successfully", product);
     } catch (error) {
-      console.log(error);
-      return res.status(500).json({
-        success: false,
-        message: "Server erorr",
-      });
+      handleResponse(res, false, "Server error");
     }
   },
   addProduct: async (req, res) => {
     try {
-      // Add product
       const newProduct = new Products(req.body);
       const nProduct = await newProduct.save();
-
-      return res.status(200).json({
-        success: true,
-        message: "Thêm sản phẩm thành công",
-        results: nProduct,
-      });
+      handleResponse(res, true, "Add successful products", nProduct);
     } catch (error) {
-      console.log(error);
-      return res.status(500).json({
-        success: false,
-        message: "Server erorr",
-      });
+      handleResponse(res, false, "Server error");
     }
   },
   updateProduct: async (req, res) => {
+    const { id } = req.params;
     try {
-      const { id } = req.params;
-
-      // Update new product
       const updateProduct = await Products.findOneAndUpdate(
         { _id: id },
         req.body,
@@ -88,51 +62,27 @@ const productControllers = {
           new: true,
         }
       );
-      return res.status(200).json({
-        success: true,
-        message: "Cập nhật sản phẩm thành công",
-        results: updateProduct,
-      });
+      handleResponse(res, true, "Product update successful", updateProduct);
     } catch (error) {
-      console.log(error);
-      return res.status(500).json({
-        success: false,
-        message: "Server erorr",
-      });
+      handleResponse(res, false, "Server error");
     }
   },
   deleteProduct: async (req, res) => {
+    const { id } = req.params;
     try {
-      const { id } = req.params;
-      // Delete Topic
-      const deleteProduct = await Products.findOneAndDelete({
-        _id: id,
-      });
-
-      return res.status(200).json({
-        success: true,
-        message: "Xóa sản phẩm thành công",
-        results: deleteProduct,
-      });
+      const deleteProduct = await Products.findOneAndDelete({ _id: id });
+      handleResponse(res, true, "Successfully delete a product", deleteProduct);
     } catch (error) {
-      console.log(error);
-      return res.status(500).json({
-        success: false,
-        message: "Server erorr",
-      });
+      handleResponse(res, false, "Server error");
     }
   },
   searchProduct: async (req, res) => {
     const { page, title } = req.query;
     try {
-      // Pagination
-      const pageNumber = page * 1 || 1;
-      const limit = 15;
-      const skip = (pageNumber - 1) * limit;
+      const { skip, limit } = handlePagination(page);
       let products = [];
       let totalProduct = 0;
       if (title) {
-        // Products
         products = await Products.find({
           $text: {
             $search: title,
@@ -140,38 +90,22 @@ const productControllers = {
         })
           .limit(limit)
           .skip(skip);
-
-        // Quantity
         totalProduct = await Products.find({
           $text: {
             $search: title,
           },
         }).count();
       } else {
-        // Products
         products = await Products.find({}).limit(limit).skip(skip);
-
-        // Quantity
         totalProduct = await Products.find({}).count();
       }
 
-      return res.status(200).json({
-        success: true,
-        results: {
-          data: products,
-          pagination: {
-            limit: 15,
-            page: pageNumber,
-            total: totalProduct,
-          },
-        },
+      handleResponse(res, true, "Search results", {
+        data: products,
+        pagination: { limit: 10, page, total: totalProduct },
       });
     } catch (error) {
-      console.log(error);
-      return res.status(500).json({
-        success: false,
-        message: "Server erorr",
-      });
+      handleResponse(res, false, "Server error");
     }
   },
 };

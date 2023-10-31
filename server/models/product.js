@@ -14,9 +14,9 @@ const ProductSchema = mongoose.Schema(
     price: {
       type: Object,
       default: {
-        S: 49000,
-        M: 59000,
-        L: 60000,
+        S: 100000,
+        M: 120000,
+        L: 150000,
       },
     },
     size: {

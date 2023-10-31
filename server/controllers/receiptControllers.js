@@ -6,7 +6,7 @@ const receiptControllers = {
       const receipts = await Receipts.find({}).populate("user");
       return res.status(200).json({
         success: true,
-        message: "Lấy tất cả đơn hàng thành công",
+        message: "Retrieve all recepit successfully",
         results: receipts,
       });
     } catch (error) {
@@ -20,7 +20,6 @@ const receiptControllers = {
 
   addReceipt: async (req, res) => {
     try {
-      // Add product
       const newReceipt = new Receipts({
         user: req.userId,
         carts: req.body.carts,
@@ -28,7 +27,7 @@ const receiptControllers = {
       const nReceipt = await newReceipt.save();
       return res.status(200).json({
         success: true,
-        message: "Thêm đơn hàng thành công",
+        message: "Receipt Added successfully",
         results: nReceipt,
       });
     } catch (error) {
@@ -42,8 +41,6 @@ const receiptControllers = {
   updateReceipt: async (req, res) => {
     try {
       const { id } = req.params;
-
-      // Update new product
       const updateProduct = await Receipts.findOneAndUpdate(
         { _id: id },
         {
@@ -55,7 +52,7 @@ const receiptControllers = {
       );
       return res.status(200).json({
         success: true,
-        message: "Xác nhận đơn hàng thành công",
+        message: "Order Confirmed Successfully",
         results: updateProduct,
       });
     } catch (error) {
@@ -75,7 +72,7 @@ const receiptControllers = {
       const updateProduct = await Receipts.findOneAndDelete({ _id: id });
       return res.status(200).json({
         success: true,
-        message: "Xóa đơn hàng thành công",
+        message: "Order Deleted Successfully",
         results: updateProduct,
       });
     } catch (error) {
