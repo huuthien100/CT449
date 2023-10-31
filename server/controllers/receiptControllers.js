@@ -1,20 +1,21 @@
 const Receipts = require("../models/receipt");
 
+const handleResponse = (res, success, message, results) => {
+  if (success) {
+    res.status(200).json({ success, message, results });
+  } else {
+    console.error(message);
+    res.status(500).json({ success, message });
+  }
+};
+
 const receiptControllers = {
   getAllReceipt: async (req, res) => {
     try {
       const receipts = await Receipts.find({}).populate("user");
-      return res.status(200).json({
-        success: true,
-        message: "Retrieve all recepit successfully",
-        results: receipts,
-      });
+      handleResponse(res, true, "Retrieve all receipts successfully", receipts);
     } catch (error) {
-      console.log(error);
-      return res.status(500).json({
-        success: false,
-        message: "Server error!",
-      });
+      handleResponse(res, false, "Server error");
     }
   },
 
@@ -25,62 +26,33 @@ const receiptControllers = {
         carts: req.body.carts,
       });
       const nReceipt = await newReceipt.save();
-      return res.status(200).json({
-        success: true,
-        message: "Receipt Added successfully",
-        results: nReceipt,
-      });
+      handleResponse(res, true, "Receipt added successfully", nReceipt);
     } catch (error) {
-      console.log(error);
-      return res.status(500).json({
-        success: false,
-        message: "Server error!",
-      });
+      handleResponse(res, false, "Server error");
     }
   },
+
   updateReceipt: async (req, res) => {
     try {
       const { id } = req.params;
       const updateProduct = await Receipts.findOneAndUpdate(
         { _id: id },
-        {
-          checked: true,
-        },
-        {
-          new: true,
-        }
+        { checked: true },
+        { new: true }
       );
-      return res.status(200).json({
-        success: true,
-        message: "Order Confirmed Successfully",
-        results: updateProduct,
-      });
+      handleResponse(res, true, "Order confirmed successfully", updateProduct);
     } catch (error) {
-      console.log(error);
-      return res.status(500).json({
-        success: false,
-        message: "Server error!",
-      });
+      handleResponse(res, false, "Server error");
     }
   },
 
   deleteReceipt: async (req, res) => {
     try {
       const { id } = req.params;
-
-      // Update new product
-      const updateProduct = await Receipts.findOneAndDelete({ _id: id });
-      return res.status(200).json({
-        success: true,
-        message: "Order Deleted Successfully",
-        results: updateProduct,
-      });
+      const deletedReceipt = await Receipts.findOneAndDelete({ _id: id });
+      handleResponse(res, true, "Order deleted successfully", deletedReceipt);
     } catch (error) {
-      console.log(error);
-      return res.status(500).json({
-        success: false,
-        message: "Server error!",
-      });
+      handleResponse(res, false, "Server error");
     }
   },
 };
