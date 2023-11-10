@@ -1,23 +1,24 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const { Schema, model } = mongoose;
-
-const ReceiptSchema = new Schema({
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: "users",
+const ReceiptSchema = mongoose.Schema(
+  {
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "users",
+    },
+    carts: {
+      type: Array,
+      default: [],
+    },
+    checked: {
+      type: Boolean,
+      default: false,
+    },
   },
-  carts: {
-    type: Array,
-    default: [],
-  },
-  checked: {
-    type: Boolean,
-    default: false,
-  },
-}, {
-  timestamps: true,
-  strictPopulate: false,
-});
-
-export default model("receipts", ReceiptSchema);
+  {
+    timestamps: true,
+    strictPopulate: false,
+  }
+);
+module.exports = mongoose.model("receipts", ReceiptSchema);
