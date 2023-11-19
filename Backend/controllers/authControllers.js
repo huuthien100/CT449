@@ -1,20 +1,21 @@
 const Users = require("../models/user");
 const bcrypt = require("bcryptjs");
 var jwt = require("jsonwebtoken");
+
 const authControllers = {
   // Register
   register: async (req, res) => {
     const { fullName, phone, address, email, password } = req.body;
 
     try {
-      // Check email exist
+      // Check if email exists
       const existedUser = await Users.findOne({
         email,
       });
 
       if (existedUser)
         return res.status(400).json({
-          message: "Email đã tồn tại",
+          message: "Email already exists",
           success: false,
         });
 
@@ -22,7 +23,7 @@ const authControllers = {
       const salt = bcrypt.genSaltSync(10);
       const hashPass = bcrypt.hashSync(password, salt);
 
-      // Create + Save user
+      // Create and save user
       const newUser = new Users({
         fullName,
         phone,
@@ -33,14 +34,14 @@ const authControllers = {
 
       const user = await newUser.save();
       return res.status(200).json({
-        message: "Đăng kí thành công",
+        message: "Registration successful",
         success: true,
         results: user,
       });
     } catch (error) {
       console.log(error);
       return res.status(500).json({
-        message: "Server erorr",
+        message: "Server error",
         success: false,
       });
     }
@@ -50,23 +51,23 @@ const authControllers = {
   login: async (req, res) => {
     const { email, password } = req.body;
     try {
-      // Check user exist
+      // Check if user exists
       const user = await Users.findOne({
         email,
       });
 
       if (!user)
         return res.status(400).json({
-          message: "Email không tồn tại",
+          message: "Email does not exist",
           success: false,
         });
 
-      // Check passowrd
+      // Check password
       const validPassword = bcrypt.compareSync(password, user.password);
 
       if (!validPassword)
         return res.status(400).json({
-          message: "Mật khẩu không chính xác!",
+          message: "Incorrect password!",
           success: false,
         });
 
@@ -74,11 +75,11 @@ const authControllers = {
       delete user._doc.password;
       const accessToken = jwt.sign({ user }, "duongthanhthong");
 
-      // Not send password
+      // Do not send the password
       delete user._doc.password;
 
       return res.status(200).json({
-        message: "Đăng nhập thành công",
+        message: "Login successful",
         success: true,
         results: {
           user,
@@ -88,16 +89,16 @@ const authControllers = {
     } catch (error) {
       console.log(error);
       return res.status(500).json({
-        message: "Server erorr",
+        message: "Server error",
         success: false,
       });
     }
   },
 
-  // Update profife User
+  // Update User Profile
   updateProfile: async (req, res) => {
     try {
-      // Update new product
+      // Update user profile
       const updateUser = await Users.findOneAndUpdate(
         { _id: req.userId },
         req.body,
@@ -109,7 +110,7 @@ const authControllers = {
       delete updateUser._doc.password;
       const accessToken = jwt.sign({ user: updateUser }, "duongthanhthong");
       return res.status(200).json({
-        message: "Cập nhật thành công",
+        message: "Update successful",
         success: true,
         results: {
           user: updateUser,
@@ -119,7 +120,7 @@ const authControllers = {
     } catch (error) {
       console.log(error);
       return res.status(500).json({
-        message: "Server erorr",
+        message: "Server error",
         success: false,
       });
     }
