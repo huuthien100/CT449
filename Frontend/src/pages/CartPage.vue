@@ -1,20 +1,13 @@
 <template>
   <div class="container max-w-4xl mx-auto my-6" v-if="user">
     <h1 class="text-center capitalize text-3xl">Your Cart</h1>
+
     <!-- Start: Render cart -->
-    <div
-      class="flex justify-between w-full my-4"
-      v-for="cart in carts"
-      :key="cart._id"
-    >
+    <div class="flex justify-between w-full my-4" v-for="cart in carts" :key="cart._id">
       <!-- Info -->
       <div class="flex gap-4">
         <div class="w-[100px] h-[100px] rounded-md overflow-hidden">
-          <img
-            class="w-full h-full object-cover"
-            :src="cart.product.image"
-            alt=""
-          />
+          <img class="w-full h-full object-cover" :src="cart.product.image" alt="" />
         </div>
 
         <div class="">
@@ -27,46 +20,42 @@
           </p>
         </div>
       </div>
+
       <div class="flex flex-col gap-2">
         <p class="text-base text-red-500">
-          {{ cart.price.toLocaleString() }} VND
+          {{ (cart.price * cart.quantity).toLocaleString() }} VND
         </p>
+
         <!-- Action -->
         <div class="flex gap-2 items-center">
-          <button
-            :disabled="loading"
-            @click="
-              handleQuantityChange({
-                idCart: cart._id,
-                quantity: cart.quantity + 1,
-              })
-            "
-            class="border-[1px] py-0.5 px-2 rounded-sm"
-          >
+          <button :disabled="loading" @click="
+            handleQuantityChange({
+              idCart: cart._id,
+              quantity: cart.quantity + 1,
+            })
+            " class="border-[1px] py-0.5 px-2 rounded-sm">
             {{ loading ? "..." : "+" }}
           </button>
+
           <span class="">{{ cart.quantity }}</span>
-          <button
-            :disabled="loading"
-            @click="
-              handleQuantityChange({
-                idCart: cart._id,
-                quantity: cart.quantity - 1,
-              })
-            "
-            class="border-[1px] py-0.5 px-2 rounded-sm"
-          >
+
+          <button :disabled="loading" @click="
+            handleQuantityChange({
+              idCart: cart._id,
+              quantity: cart.quantity - 1,
+            })
+            " class="border-[1px] py-0.5 px-2 rounded-sm">
             {{ loading ? "..." : "-" }}
           </button>
         </div>
-        <div
-          @click="handleDeleteCart(cart._id)"
-          class="p-1 bg-red-500 hover:opacity-80 cursor-pointer rounded-sm text-white"
-        >
+
+        <div @click="handleDeleteCart(cart._id)"
+          class="p-1 bg-red-500 hover:opacity-80 cursor-pointer rounded-sm text-white">
           <p class="text-center text-sm">Delete</p>
         </div>
       </div>
     </div>
+
     <!-- Start: Render when not product -->
     <div class="my-4" v-if="carts.length === 0">
       <h1 class="text-center text-xl">Your cart is empty!</h1>
@@ -79,11 +68,11 @@
 
     <!-- Start: Order -->
     <div class="" v-if="carts.length > 0">
-      <button
-        :disabled="isPendingSubmiting"
-        @click="handleOrder"
-        class="w-full bg-blue-800 hover:opacity-80 capitalize p-3 rounded-md text-white"
-      >
+      <p class="text-base text-red-500 mt-4 mb-4 text-end">
+        Total: {{ totalCartPrice.toLocaleString() }} VND
+      </p>
+      <button :disabled="isPendingSubmiting" @click="handleOrder"
+        class="w-full bg-blue-800 hover:opacity-80 capitalize p-3 rounded-md text-white">
         {{ !isPendingSubmiting ? "Order" : "Loading..." }}
       </button>
     </div>
@@ -102,14 +91,20 @@ export default {
     // Hooks
     const store = useStore();
 
-    // Handle get cart for user in component Header
-
     // Ref
     const loading = ref(false);
     const isPendingSubmiting = ref(false);
 
     const carts = computed(() => store.getters["carts/cartOrdering"]);
     const user = computed(() => store.state.user.user);
+
+    // Computed property to calculate total cart price
+    const totalCartPrice = computed(() =>
+      carts.value.reduce(
+        (total, cart) => total + cart.price * cart.quantity,
+        0
+      )
+    );
 
     // Function global
     const handleQuantityChange = async (data) => {
@@ -167,6 +162,7 @@ export default {
       user,
       loading,
       isPendingSubmiting,
+      totalCartPrice,
       handleQuantityChange,
       handleDeleteCart,
       handleOrder,

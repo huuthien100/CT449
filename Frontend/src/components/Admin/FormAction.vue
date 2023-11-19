@@ -36,7 +36,7 @@
             id="image"
             class="px-4 py-2 rounded-lg border border-gray-100 mt-1"
             type="text"
-            placeholder="https://upload.wikimedia.org/wikipedia/commons/f/f1/Vue.png"
+            placeholder="Enter link image"
           />
         </label>
       </div>
@@ -51,7 +51,6 @@
               id="size-s"
               class="px-4 py-1 rounded-lg border border-gray-100 mt-1"
               type="number"
-              placeholder="49.0000"
             />
           </div>
           <div class="flex gap-2 items-center">
@@ -62,7 +61,6 @@
               id="size-m"
               class="px-4 py-1 rounded-lg border border-gray-100 mt-1"
               type="number"
-              placeholder="49.0000"
             />
           </div>
           <div class="flex gap-2 items-center">
@@ -73,7 +71,26 @@
               id="size-l"
               class="px-4 py-1 rounded-lg border border-gray-100 mt-1"
               type="number"
-              placeholder="49.0000"
+            />
+          </div>
+          <div class="flex gap-2 items-center">
+            <span class="text-sm w-16">Size XL :</span>
+            <input
+              v-model="price.XL"
+              autocomplete="on"
+              id="size-xl"
+              class="px-4 py-1 rounded-lg border border-gray-100 mt-1"
+              type="number"
+            />
+          </div>
+          <div class="flex gap-2 items-center">
+            <span class="text-sm w-18">Size XXL :</span>
+            <input
+              v-model="price.XXL"
+              autocomplete="on"
+              id="size-xxl"
+              class="px-4 py-1 rounded-lg border border-gray-100 mt-1"
+              type="number"
             />
           </div>
         </label>
@@ -125,6 +142,8 @@ export default {
         S: 0,
         M: 0,
         L: 0,
+        XL: 0,
+        XXL: 0,
       }
     );
 
@@ -143,6 +162,7 @@ export default {
         image: image.value,
         price: price.value,
       };
+
       // Simple validate
       if (!title.value || !description.value || !image.value || !price.value)
         return alert("Please enter enough information");
@@ -160,7 +180,7 @@ export default {
         } else {
           await productsApi.editProduct({
             ...data,
-            idProduct: productEdit._id, // Need to provide id because in case add doesn't id
+            idProduct: productEdit._id,
           });
           // Info
           statusResponse.value.success = true;

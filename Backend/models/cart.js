@@ -16,11 +16,13 @@ const CartSchema = mongoose.Schema(
     price: {
       type: Number,
     },
-    size: {
-      type: String,
-      enum: ["S", "M", "L"],
-      required: true,
-    },
+    sizes: [
+      {
+        type: String,
+        enum: ["S", "M", "L", "XL", "XXL"],
+        required: true,
+      },
+    ],
     ordered: {
       type: Boolean,
       default: false,
@@ -31,4 +33,5 @@ const CartSchema = mongoose.Schema(
     strictPopulate: false,
   }
 );
+
 module.exports = mongoose.model("carts", CartSchema);

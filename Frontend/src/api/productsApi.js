@@ -25,8 +25,6 @@ export const productsApi = {
   },
 
   addProduct: async (data) => {
-    // data = {title: "",description: "",image: "",price: {S: 0,M: 0,L: 0,}};
-
     // Config header
     const config = configHeader();
 
@@ -36,8 +34,6 @@ export const productsApi = {
   },
 
   editProduct: async (data) => {
-    // data = {title: "",description: "",image: "",price: {S: 0,M: 0,L: 0,}};
-
     // Config header
     const config = configHeader();
 

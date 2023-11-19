@@ -114,7 +114,7 @@ export default {
 
     // Ref
     const currentPage = ref(Number(route.query.page) || 1);
-    const priceRef = ref(route.query.price || 1); // Default increase price
+    const priceRef = ref(route.query.price || 1);
     const versionRef = ref(route.query.createdAt || -1);
     // Actions
     store.dispatch("products/getProducts", {
