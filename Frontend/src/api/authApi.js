@@ -3,18 +3,18 @@ import axiosClient from "../utils/axiosClient";
 
 export const authApi = {
   login: async (data) => {
-    // data = {email: "",password:""}
+    // data = {email: "", password: ""}
     const { results } = await axiosClient.post("/auth/login", data);
     return results;
   },
   register: async (data) => {
-    // data = {fullName: "Tran van teo", phone: "0123456789", address: "Can Tho", email: "2@gmail.com", password: "12313131231"}
+    // data = {fullName: "John Doe", phone: "0123456789", address: "City", email: "john@example.com", password: "password123"}
     const { results } = await axiosClient.post("/auth/register", data);
     return results;
   },
 
   updateProfile: async (data) => {
-    // data ={address:""} || ...
+    // data = {address: ""} || ...
 
     // Config header
     const config = configHeader();
