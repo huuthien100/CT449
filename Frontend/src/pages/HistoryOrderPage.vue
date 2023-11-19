@@ -2,19 +2,11 @@
   <div class="container max-w-4xl mx-auto my-6" v-if="user">
     <h1 class="text-center capitalize text-3xl">Order History</h1>
     <!-- Start: Render cart -->
-    <div
-      class="flex justify-between w-full my-4"
-      v-for="cart in carts"
-      :key="cart._id"
-    >
+    <div class="flex justify-between w-full my-4" v-for="cart in carts" :key="cart._id">
       <!-- Info -->
       <div class="flex gap-4">
         <div class="w-[100px] h-[100px] rounded-md overflow-hidden">
-          <img
-            class="w-full h-full object-cover"
-            :src="cart.product.image"
-            alt=""
-          />
+          <img class="w-full h-full object-cover" :src="cart.product.image" alt="" />
         </div>
 
         <div class="">
@@ -23,7 +15,8 @@
             <span class="text-gray-600">Quantity : </span> {{ cart.quantity }}
           </p>
           <p class="text-coffee-600 text-sm my-2">
-            <span class="text-gray-600">Size : </span> {{ cart.size }}
+            <span class="text-gray-600">Size : </span>
+            {{ cart.size.filter(item => item)[0] }}
           </p>
         </div>
       </div>

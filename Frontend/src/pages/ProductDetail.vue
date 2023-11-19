@@ -66,6 +66,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round"
                   d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
               </svg>
+
               Buy Now
             </button>
           </router-link>
@@ -87,58 +88,42 @@ export default {
     // Hooks
     const store = useStore();
     const route = useRoute();
-
     // Ref
-    const size = ref("S");
+    const size = ref("S"); // "S", "M" , "L"
     const quantity = ref(1);
-
     // Status before call api
     const loading = ref(false);
-
     // Actions
     store.dispatch("products/getProductDetail", { id: route.params.id });
-
     // Data
     const productDetail = computed(() => store.state.products.productDetail);
-
     // Function global
     const onSizeClick = (sizeParam) => {
       size.value = sizeParam;
     };
-
     const onQuantityChange = (type) => {
       if (type === "increase") quantity.value++;
       else {
         if (quantity.value > 1) quantity.value--;
       }
     };
-
     // Submit
     const handleAddToCart = async (data) => {
-      // Kiểm tra xem size có giá trị không
-      if (!data.size) {
-        alert("Please select a size before adding to cart");
-        return;
-      }
+      console.log(data);
 
       // Submit data
       loading.value = true;
       try {
         // Call api
-        console.log('Size before addToCart:', data.size);
-
         await cartApi.addToCart(data);
-
         // Update data in vuex store
         store.dispatch("carts/getCarts");
-
         alert("Add to cart successfully");
       } catch (err) {
-        console.error(err);
+        console.log(err);
       }
       loading.value = false;
     };
-
     return {
       product: productDetail,
       size,

@@ -16,7 +16,8 @@
             <span class="text-gray-600">Quantity : </span> {{ cart.quantity }}
           </p>
           <p class="text-coffee-600 text-sm my-2">
-            <span class="text-gray-600">Size : </span> {{ cart.size }}
+            <span class="text-gray-600">Size : </span>
+            {{ cart.size.filter(item => item)[0] }}
           </p>
         </div>
       </div>
