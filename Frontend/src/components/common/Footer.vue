@@ -9,7 +9,7 @@
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque voluptatibus harum dolores distinctio excepturi, quis aspernatur veritatis facere eum velit autem. Corrupti debitis aspernatur tempore dolorum est atque? Animi, optio!
         </div>
         <div class="text-gray-400 hover:text-coffee-400">
-          Pizza Store Inc. © 2023
+          Clothes Store Inc. © 2023
         </div>
       </div>
       <div class="basis-1/6">
@@ -47,6 +47,10 @@
               class="hover:text-coffee-400 text-xl tracking-widest font-bold text-coffee-600"
               >huuthienkg10@gmail.com</a
             >
+            <div class="uppercase font-semibold tracking-wider text-gray-600 mt-4">
+          Main Branch
+        </div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3928.84151844204!2d105.76804037461584!3d10.029933690076973!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31a0895a51d60719%3A0x9d76b0035f6d53d0!2sCan%20Tho%20University!5e0!3m2!1sen!2s!4v1700562962243!5m2!1sen!2s" width="400" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
         </div>
       </div>

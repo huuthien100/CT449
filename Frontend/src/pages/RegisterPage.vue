@@ -7,23 +7,23 @@
         <form @submit.prevent="handleSubmit" class="mt-4">
           <div class="row flex gap-4">
             <label class="flex flex-col mb-3 basis-1/2" for="fullname">
-              <span class="font-semibold">FullName</span>
+              <span class="font-semibold">Full Name</span>
               <input v-model="fullName" id="fullname" class="px-4 py-3 rounded-lg border border-gray-100 mt-1" type="text"
-                placeholder="abc@gmail.com" />
+                placeholder="Enter your full name" />
               <span v-if="errors.fullName" class="font-semibold text-red-500 mt-2">{{ errors.fullName }}</span>
             </label>
             <label class="flex flex-col mb-3 basis-1/2" for="phone">
-              <span class="font-semibold">Phone</span>
+              <span class="font-semibold">Phone Number</span>
               <input v-model="phone" id="phone" class="px-4 py-3 rounded-lg border border-gray-100 mt-1" type="text"
-                placeholder="abc@gmail.com" />
+                placeholder="Enter your phone number" />
               <span v-if="errors.phone" class="font-semibold text-red-500 mt-2">{{ errors.phone }}</span>
             </label>
           </div>
           <div class="row">
-            <label class="flex flex-col mb-3" for="email">
+            <label class="flex flex-col mb-3" for="address">
               <span class="font-semibold">Address</span>
               <input v-model="address" id="address" class="px-4 py-3 rounded-lg border border-gray-100 mt-1" type="text"
-                placeholder="Can tho..." />
+                placeholder="Enter your address" />
               <span v-if="errors.address" class="font-semibold text-red-500 mt-2">{{ errors.address }}</span>
             </label>
           </div>
@@ -31,7 +31,7 @@
             <label class="flex flex-col mb-3" for="email">
               <span class="font-semibold">Email Address</span>
               <input v-model="email" id="email" class="px-4 py-3 rounded-lg border border-gray-100 mt-1" type="email"
-                placeholder="abc@gmail.com" />
+                placeholder="Enter your email address" />
             </label>
           </div>
           <div class="row">
@@ -39,7 +39,7 @@
               <span class="font-semibold">Password</span>
               <input v-model="password" autocomplete="on" id="password"
                 class="px-4 py-3 rounded-lg border border-gray-100 mt-1" type="password"
-                placeholder="Enter your password..." />
+                placeholder="Enter your password" />
               <span v-if="errors.password" class="font-semibold text-red-500 mt-2">{{ errors.password }}</span>
             </label>
           </div>

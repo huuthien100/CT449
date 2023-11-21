@@ -41,10 +41,6 @@
           </svg>
         </button>
       </nav>
-      <div
-        class="right-[40%] rounded-md z-10 inline-flex items-center border border-indigo-500 bg-indigo-50 px-4 py-2 text-sm font-medium text-indigo-600 focus:z-20">
-        {{ currentPage }} / {{ Math.ceil(pagination.total / pagination.limit) }}
-      </div>
     </div>
   </div>
   <div class="my-8" v-else>

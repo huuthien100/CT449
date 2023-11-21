@@ -8,63 +8,40 @@
           <div class="row">
             <label class="flex flex-col mb-3" for="email">
               <span class="font-semibold">Email Address</span>
-              <input
-                v-model="email"
-                id="email"
-                class="px-4 py-3 rounded-lg border border-gray-100 mt-1"
-                type="email"
-                placeholder="abc@gmail.com"
-              />
+              <input v-model="email" id="email" class="px-4 py-3 rounded-lg border border-gray-100 mt-1" type="email"
+                placeholder="Enter your email address" />
             </label>
           </div>
           <div class="row">
             <label class="flex flex-col mb-3" for="password">
               <span class="font-semibold">Password</span>
-              <input
-                v-model="password"
-                autocomplete="on"
-                id="password"
-                class="px-4 py-3 rounded-lg border border-gray-100 mt-1"
-                type="password"
-                placeholder="Enter your password..."
-              />
+              <input v-model="password" autocomplete="on" id="password"
+                class="px-4 py-3 rounded-lg border border-gray-100 mt-1" type="password"
+                placeholder="Enter your password" />
             </label>
           </div>
           <div class="row">
             <!-- Start: Error -->
-            <h1
-              v-if="statusResponse.message"
-              class="text-center mb-4"
-              :class="
-                statusResponse.success ? 'text-green-500' : 'text-red-500'
-              "
-            >
+            <h1 v-if="statusResponse.message" class="text-center mb-4" :class="statusResponse.success ? 'text-green-500' : 'text-red-500'
+              ">
               {{ statusResponse.message }}
             </h1>
           </div>
           <!-- Start: Submit -->
           <div class="row">
             <div class="row">
-              <button
-                :disabled="loading"
-                class="py-3 text-center text-white bg-orange-400 font-bold rounded-lg w-full bg-primary"
-                type="submit"
-              >
+              <button :disabled="loading"
+                class="py-3 text-center text-white bg-orange-400 font-bold rounded-lg w-full bg-primary" type="submit">
                 {{ !loading ? "Sign In" : "Loading..." }}
               </button>
             </div>
           </div>
         </form>
-
         <!-- Start: Direction -->
         <div class="w-full text-center mt-6">
           <span class="">I'm a new user. </span>
           <span>
-            <router-link
-              :to="{ name: 'Register', params: {} }"
-              class="text-primary font-bold"
-              >Sign Up</router-link
-            >
+            <router-link :to="{ name: 'Register', params: {} }" class="text-primary font-bold">Sign Up</router-link>
           </span>
         </div>
       </div>

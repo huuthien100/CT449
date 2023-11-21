@@ -24,9 +24,9 @@
         <p class="text-base text-red-500">
           {{ cart.price.toLocaleString() }} VND
         </p>
-        <!-- Action -->
       </div>
     </div>
+    
     <!-- Start: Render when not product -->
     <div class="my-4" v-if="carts.length === 0">
       <h1 class="text-center text-xl">You don't have product</h1>
