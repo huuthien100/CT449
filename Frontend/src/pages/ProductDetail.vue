@@ -111,6 +111,12 @@ export default {
     const handleAddToCart = async (data) => {
       console.log(data);
 
+      // If price = 0
+      if (data.price === 0) {
+        alert("Product is out of stock");
+        return;
+      }
+
       // Submit data
       loading.value = true;
       try {
@@ -124,6 +130,7 @@ export default {
       }
       loading.value = false;
     };
+
     return {
       product: productDetail,
       size,
