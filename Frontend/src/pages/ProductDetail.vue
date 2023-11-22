@@ -113,7 +113,7 @@ export default {
 
       // If price = 0
       if (data.price === 0) {
-        alert("Product is out of stock");
+        alert("Product is out of stock!");
         return;
       }
 
@@ -124,7 +124,7 @@ export default {
         await cartApi.addToCart(data);
         // Update data in vuex store
         store.dispatch("carts/getCarts");
-        alert("Add to cart successfully");
+        alert("Add to cart successfully!");
       } catch (err) {
         console.log(err);
       }
