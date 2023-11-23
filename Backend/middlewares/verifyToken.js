@@ -12,7 +12,7 @@ const verifyToken = async (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, "duongthanhthong");
+    const decoded = jwt.verify(token, "");
     req.userId = decoded.user._id;
     next();
   } catch (error) {

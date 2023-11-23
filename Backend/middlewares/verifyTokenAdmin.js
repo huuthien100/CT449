@@ -12,7 +12,7 @@ const verifyTokenAdmin = async (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, "duongthanhthong");
+    const decoded = jwt.verify(token, "");
 
     if (decoded.user.role === "ADMIN") {
       return next();
